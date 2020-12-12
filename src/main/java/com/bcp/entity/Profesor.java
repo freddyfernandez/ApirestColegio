@@ -19,6 +19,8 @@ public class Profesor {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int codigoProfesor;
 	private String nombreProfesor;
+	private String correoProfesor;
+	
 
 	
 
