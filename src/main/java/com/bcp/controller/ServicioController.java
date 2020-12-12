@@ -1,0 +1,59 @@
+package com.bcp.controller;
+
+import java.util.List;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.bcp.entity.Alumno;
+import com.bcp.entity.Curso;
+import com.bcp.service.AlumnoService;
+import com.bcp.service.CursoService;
+
+@RestController
+@RequestMapping("/colegio")
+public class ServicioController {
+	
+	//Listar?NombreAlumno=UN
+	@Autowired
+	private AlumnoService serviceAlumno;
+	
+	@Autowired
+	private CursoService serviceCurso;
+	
+	@GetMapping(path = "/listarAlumnos")
+	@ResponseBody
+	public List<Alumno> listarTodos() {
+		System.out.println("");
+		return serviceAlumno.listarTodos();
+		
+		
+	}
+	@GetMapping(path = "/listarAlumnos/{filtro}")
+	@ResponseBody
+	public List<Alumno> listarTodosxNombre(@PathVariable("filtro") String filtro) {
+	
+		return serviceAlumno.listAlumnosPorNombre(filtro+"%");
+		
+		
+	}
+	
+	@GetMapping(path = "/listarCursos/{filtro}")
+	@ResponseBody
+	public List<Curso> listarTodosxCurso(@PathVariable("filtro") String filtro) {
+	
+		return serviceCurso.listCursoxAlumno(filtro+"%");
+		
+		
+	}
+	
+	
+	
+
+
+}
